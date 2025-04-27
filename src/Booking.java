@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Booking {
-    Room room;
-    Guest guest;
-    LocalDate checkIn;
-    LocalDate checkOut;
-    List<Guest> otherGuest = new ArrayList<>();
+    private Room room;
+    private Guest guest;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
+    private List<Guest> otherGuest = new ArrayList<>();
 
     public Booking(Room room, Guest guest, LocalDate checkIn, LocalDate checkOut, TypeOfVacation typeOfVacation) {
         this.room = room;
