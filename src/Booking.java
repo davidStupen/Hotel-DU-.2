@@ -9,7 +9,7 @@ public class Booking {
     private Guest guest;
     private LocalDate checkIn;
     private LocalDate checkOut;
-    private List<Guest> otherGuest = new ArrayList<>();
+    private List<Guest> otherGuests = new ArrayList<>();
 
     public Booking(Room room, Guest guest, LocalDate checkIn, LocalDate checkOut, TypeOfVacation typeOfVacation) {
         this.room = room;
@@ -21,12 +21,12 @@ public class Booking {
         this(room, guest, LocalDate.now(), LocalDate.now().plusDays(6), TypeOfVacation.rekreacni);
     }
     public void addOtherGuest(Guest guest){
-        otherGuest.add(guest);
+        otherGuests.add(guest);
     }
     public String printReservation(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String otherGuestBuild = "";
-        for (Guest resN : otherGuest) {
+        for (Guest resN : otherGuests) {
             otherGuestBuild += resN.printDescription();
         }
         return "Rezervace od " + checkIn.format(formatter) + " do " + checkOut.format(formatter) + " na jméno " + getGuest().printDescription() + " " + otherGuestBuild;
@@ -64,10 +64,10 @@ public class Booking {
     }
 
     public List<Guest> getOtherGuest() {
-        return otherGuest;
+        return otherGuests;
     }
 
     public void setOtherGuest(List<Guest> otherGuest) {
-        this.otherGuest = otherGuest;
+        this.otherGuests = otherGuest;
     }
 }
