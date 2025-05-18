@@ -14,35 +14,12 @@ public class Room {
         this.haveSeaView = haveSeaView;
     }
 
+
     public boolean isHaveSeaView() {
         return haveSeaView;
     }
 
-    public void setHaveSeaView(boolean haveSeaView) {
-        this.haveSeaView = haveSeaView;
-    }
-
-    public boolean isHaveBalcony() {
-        return haveBalcony;
-    }
-
-    public void setHaveBalcony(boolean haveBalcony) {
-        this.haveBalcony = haveBalcony;
-    }
-
-    public int getNumBed() {
-        return numBed;
-    }
-
-    public void setNumBed(int numBed) {
-        this.numBed = numBed;
-    }
-
-    public int getNumRoom() {
-        return numRoom;
-    }
-
-    public void setNumRoom(int numRoom) {
-        this.numRoom = numRoom;
+    public BigDecimal getPrice() {
+        return price;
     }
 }

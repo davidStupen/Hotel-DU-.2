@@ -11,35 +11,13 @@ public class Guest {
         this.lastName = lastName;
         this.born = born;
     }
-    public String printDescription(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        return firstName + " " + lastName + " (" + born.format(formatter) + ").";
+    public DateTimeFormatter formatDate(){
+        return DateTimeFormatter.ofPattern("dd.MM.yyyy");
     }
-    public String getDescription(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        return firstName + " " + lastName + " " + born.format(formatter);
+    public String getFullName(){
+        return firstName + " " + lastName;
     }
-    public LocalDate getBorn() {
+    public LocalDate getBorn(){
         return born;
-    }
-
-    public void setBorn(LocalDate born) {
-        this.born = born;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 }

@@ -1,6 +1,6 @@
-
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,64 +10,50 @@ public class Booking {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private List<Guest> otherGuests = new ArrayList<>();
+    private TypeOfVacation typeOfVacation;
+    protected static int totalGuestInSystem;
 
-    public Booking(Room room, Guest guest, LocalDate checkIn, LocalDate checkOut, TypeOfVacation typeOfVacation) {
-        this.room = room;
+    public Booking(Guest guest, Room room, LocalDate checkIn, LocalDate checkOut, TypeOfVacation typeOfVacation) {
         this.guest = guest;
+        this.room = room;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+        this.typeOfVacation = typeOfVacation;
     }
-    public Booking(Room room, Guest guest){
-        this(room, guest, LocalDate.now(), LocalDate.now().plusDays(6), TypeOfVacation.rekreacni);
+    public Booking(Guest guest, Room room){
+        this(guest, room, LocalDate.now(), LocalDate.now().plusDays(6), TypeOfVacation.rekreacni);
     }
+    public Booking(){}
     public void addOtherGuest(Guest guest){
         otherGuests.add(guest);
     }
-    public String printReservation(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String otherGuestBuild = "";
-        for (Guest resN : otherGuests) {
-            otherGuestBuild += resN.printDescription();
-        }
-        return "Rezervace od " + checkIn.format(formatter) + " do " + checkOut.format(formatter) + " na jméno " + getGuest().printDescription() + " " + otherGuestBuild;
+    public String getFormattedSummary(){
+        return checkIn.format(guest.formatDate()) + " až " + checkOut.format(guest.formatDate()) + ": " + guest.getFullName() +
+                "(" + guest.getBorn().format(guest.formatDate()) + ")" +
+                "[" + (getGuestsCount()) + ", " + (room.isHaveSeaView() ? "ano" : "ne") + "] za " + getTotalPrice() + "Kč.";
     }
-    public Room getRoom() {
-        return room;
+    public int getGuestsCount() {
+        totalGuestInSystem += 1 + otherGuests.size();
+        return 1 + otherGuests.size();
     }
-
-    public void setRoom(Room room) {
-        this.room = room;
+    public int getBookingLength(){
+        return Period.between(checkIn, checkOut).getDays();
     }
-
+    public BigDecimal getTotalPrice(){
+        return BigDecimal.valueOf(getBookingLength()).multiply(room.getPrice());
+    }
     public Guest getGuest() {
         return guest;
     }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public LocalDate getCheckIn() {
-        return checkIn;
-    }
-
-    public void setCheckIn(LocalDate checkIn) {
-        this.checkIn = checkIn;
+    public TypeOfVacation getTypeOfVacation(){
+        return typeOfVacation;
     }
 
     public LocalDate getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(LocalDate checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public List<Guest> getOtherGuest() {
-        return otherGuests;
-    }
-
-    public void setOtherGuest(List<Guest> otherGuest) {
-        this.otherGuests = otherGuest;
+    public LocalDate getCheckIn() {
+        return checkIn;
     }
 }
