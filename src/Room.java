@@ -22,4 +22,8 @@ public class Room {
     public BigDecimal getPrice() {
         return price;
     }
+
+    public int getNumRoom() {
+        return numRoom;
+    }
 }

@@ -37,7 +37,7 @@ public class BookingManager extends Booking{
             if (oneBooking.getTypeOfVacation() == TypeOfVacation.rekreacni && count < 8) {
                 count++;
                 buildEightVacation.append(oneBooking.getGuest().getFullName()).append(" ").append("(").append(oneBooking.getGuest().getBorn().format(oneBooking.getGuest().formatDate())).append(") ")
-                        .append("na: ").append(oneBooking.getBookingLength() + 1).append(" Termín: ").append(oneBooking.getCheckIn().format(oneBooking.getGuest().formatDate())).append(" - ")
+                        .append("na: ").append(oneBooking.getRoom().getNumRoom()).append(" Termín: ").append(oneBooking.getCheckIn().format(oneBooking.getGuest().formatDate())).append(" - ")
                         .append(oneBooking.getCheckOut().format(oneBooking.getGuest().formatDate())).append(" pracovní pobyt: ").append((oneBooking.getTypeOfVacation() == TypeOfVacation.pracovni) ? "ano" : "ne").append("\n");
             }
         }

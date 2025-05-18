@@ -56,4 +56,8 @@ public class Booking {
     public LocalDate getCheckIn() {
         return checkIn;
     }
+
+    public Room getRoom() {
+        return room;
+    }
 }
