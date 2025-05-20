@@ -29,10 +29,10 @@ public class BookingManager extends Booking{
     public String getAverageGuests(){
         double average = 1;
         try {
-            double mathAverage = (double) totalGuestInSystem / bookingList.size();
+            double mathAverage = (double) totalGuestInSystem / 0;
             average = BigDecimal.valueOf(mathAverage).setScale(2, RoundingMode.HALF_UP).doubleValue();
         } catch (NumberFormatException e) {
-            System.out.println("Nejsou evidovány žádne rezervace.");
+            return "Nejsou evidovány žádne rezervace.";
         }
         return "\nPrůměrný počet hostů na rezervaci: " + average + "\n";
     }
