@@ -34,6 +34,7 @@ public class Main {
         int numOfWorkBookings = bookingManager.getNumberOfWorkingBookings();
 
         System.out.println("Počet pracovních pobytů: " + numOfWorkBookings);
+
         System.out.println(bookingManager.getAverageGuests());
         System.out.println("Prvních osm rekreačních rezervací:");
         System.out.println(bookingManager.getTopNHolidayBookings());

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -5,7 +6,6 @@ import java.util.List;
 
 public class BookingManager extends Booking{
     private List<Booking> bookingList = new ArrayList<>();
-    private static int totalWorkVacation;
 
     public void addBooking(Booking booking){
         bookingList.add(booking);
@@ -20,14 +20,20 @@ public class BookingManager extends Booking{
         bookingList.clear();
     }
     public int getNumberOfWorkingBookings(){
-        bookingList.forEach(item -> {
-            if (item.getTypeOfVacation() == TypeOfVacation.pracovni) totalWorkVacation++;
-        });
-        return totalWorkVacation;
+        int count = 0;
+        for (Booking oneReservation : bookingList) {
+            if (oneReservation.getTypeOfVacation() == TypeOfVacation.pracovni) count++;
+        }
+        return count;
     }
     public String getAverageGuests(){
-        double mathAverage = (double) totalGuestInSystem / getBookings().size();
-        double average = BigDecimal.valueOf(mathAverage).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        double average = 1;
+        try {
+            double mathAverage = (double) totalGuestInSystem / bookingList.size();
+            average = BigDecimal.valueOf(mathAverage).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        } catch (NumberFormatException e) {
+            System.out.println("Nejsou evidovány žádne rezervace.");
+        }
         return "\nPrůměrný počet hostů na rezervaci: " + average + "\n";
     }
     public StringBuilder getTopNHolidayBookings(){
@@ -48,9 +54,11 @@ public class BookingManager extends Booking{
         int twoGuest = 0;
         int moreThanTwoGuest = 0;
         for (Booking oneBooking : bookingList){
-            if (oneBooking.getGuestsCount() == 1) oneGuest++;
-            if (oneBooking.getGuestsCount() == 2) twoGuest++;
-            if (oneBooking.getGuestsCount() > 2) moreThanTwoGuest++;
+            switch (oneBooking.getGuestsCount()) {
+                case 1 -> oneGuest++;
+                case 2 -> twoGuest++;
+                default -> moreThanTwoGuest++;
+            }
         }
         System.out.printf("Statistiky hostů:\nPočet rezervací s jedním hostem: %d\nPočet rezervací se dvěma hosty: %d\nPočet rezervací s více hosty: %d\n\n", oneGuest, twoGuest, moreThanTwoGuest);
     }
