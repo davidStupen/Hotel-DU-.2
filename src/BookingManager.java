@@ -29,7 +29,7 @@ public class BookingManager extends Booking{
     public String getAverageGuests(){
         double average = 1;
         try {
-            double mathAverage = (double) totalGuestInSystem / 0;
+            double mathAverage = (double) totalGuestInSystem / bookingList.size();
             average = BigDecimal.valueOf(mathAverage).setScale(2, RoundingMode.HALF_UP).doubleValue();
         } catch (NumberFormatException e) {
             return "Nejsou evidovány žádne rezervace.";
