@@ -26,15 +26,10 @@ public class BookingManager extends Booking{
         }
         return count;
     }
-    public String getAverageGuests(){
-        double average = 1;
-        try {
-            double mathAverage = (double) totalGuestInSystem / bookingList.size();
-            average = BigDecimal.valueOf(mathAverage).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        } catch (NumberFormatException e) {
-            return "Nejsou evidovány žádne rezervace.";
-        }
-        return "\nPrůměrný počet hostů na rezervaci: " + average + "\n";
+    public double getAverageGuests(){
+        if (bookingList.isEmpty()) return 0;
+        double average = (double) totalGuestInSystem / bookingList.size();
+        return (double) Math.round((average * 100)) / 100;
     }
     public StringBuilder getTopNHolidayBookings(){
         int count = 0;

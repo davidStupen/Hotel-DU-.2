@@ -35,7 +35,8 @@ public class Main {
 
         System.out.println("Počet pracovních pobytů: " + numOfWorkBookings);
 
-        System.out.println(bookingManager.getAverageGuests());
+        System.out.println("Průměrný počet hostů na rezervaci: " + bookingManager.getAverageGuests());
+        System.out.println();
         System.out.println("Prvních osm rekreačních rezervací:");
         System.out.println(bookingManager.getTopNHolidayBookings());
         bookingManager.printGuestStatistics();
@@ -46,5 +47,6 @@ public class Main {
         System.out.println("****************//////////////********************");
         System.out.println(bookingManager.getBooking(-5));
         bookingManager.clearBookings();
+
     }
 }
